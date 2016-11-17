@@ -6,12 +6,13 @@ api_key = 'c40f39bbbd8522886a8300a2054b81d8'
 root_url = 'http://api.musixmatch.com/ws/1.1/'
 
 class Music_match_search(object):
-    def __init__(self,target_keyword):
+    def __init__(self,target_keyword,target_artist):
 
         self.target_keyword=target_keyword
+        self.target_artist=target_artist
 
     def search_trackid(self):
-        self.search_url=root_url+'track.search?apikey='+api_key+'&q_track='+self.target_keyword+'&f_has_lyrics=1'
+        self.search_url=root_url+'track.search?apikey='+api_key+'&q_track='+self.target_keyword+'&q_artist='+self.target_artist+'&f_has_lyrics=1'
         self.result=requests.get(self.search_url)
         return self.result
 
