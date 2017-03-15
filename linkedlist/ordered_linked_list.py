@@ -15,7 +15,7 @@ class Node():
     def get_next(self):
         return self.address
 
-class LinkedList():
+class UlinkedList():
     def __init__(self):
         self.head=None
 
@@ -23,9 +23,31 @@ class LinkedList():
         return self.head==None
 
     def add(self,value):
-        tmp=Node(value)
-        tmp.set_next(self.head)
-        self.head=tmp
+        tmp = Node(value)
+        previous=None
+        current=self.head
+        stop=False
+
+        while current !=None and not stop:
+            if current.get_data()>value:
+                stop=True
+            else:
+                previous=current
+                current=current.get_next()
+
+        if previous ==None:
+            tmp.set_next(self.head)
+            self.head=tmp
+
+
+        else:
+            tmp.set_next(current)
+            previous.set_next(tmp)
+
+
+
+
+
 
 
     def size(self):
@@ -40,10 +62,13 @@ class LinkedList():
 
     def search(self,target):
         found=False
+        stop=False
         current=self.head
-        while current !=None and not found:
+        while current !=None and not found and not stop:
             if current.get_data()==target:
                 found=True
+            elif current.get_data()>target:
+                stop=True
             else:
                 current=current.get_next()
 
@@ -64,34 +89,22 @@ class LinkedList():
         else:
             previous.set_next(current.get_next())
 
-    def append(self,item):
-        '''
-        go to the end of list and perform an add operation
-        :param item:
-        :return:
-        '''
-        current=self.head
-        previous=None
-        while current != None:
-            previous=current
-            current=current.get_next()
-
-        new_node=Node(item)
-        previous.set_next(new_node)
-        new_node.set_next(None)
 
 
 
 
 
 
-l=LinkedList()
+l=UlinkedList()
 l.add(22)
 l.add(52)
 
 l.add(66)
-l.append(23)
-l.append(24)
+
 l.add(55)
-l.remove(22)
+#l.remove(22)
+print(l.size())
+
+l.remove(55)
+l.add(0)
 print(l.size())
