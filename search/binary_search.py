@@ -7,20 +7,17 @@ The maximum number of comparisons
 is logarithmic with respect to the number of items in the list. Therefore, the binary search is O(logn)O(log⁡n).
 '''
 
-def binary_search_recursive(l,target):
-    if len(l)==0:
+def binary_search(element, alist):
+    if not alist:
         return False
-    else:
-        mid=len(l)//2
-        if l[mid]==target:
-            return True
-        else:
-            if l[mid]<target:
-                #See the return here it is important for recursion
-                #that your function returns
-               return binary_search_recursive(l[mid+1:],target)
-            else:
-               return binary_search_recursive(l[0:mid],target)
+    mid_index = (len(alist)-1)//2
+    current_item_from_list = alist[mid_index]
+    if element==current_item_from_list:
+        return True
+    elif element>current_item_from_list:
+        return binary_search(element, alist[mid_index+1:])
+    elif element<current_item_from_list:
+        return binary_search(element, alist[:mid_index])
 
 def binary_search_witout_rec(l,target):
     first=0

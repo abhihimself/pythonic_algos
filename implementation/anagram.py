@@ -13,4 +13,4 @@ def anagram(s1,s2):
     else:
         print("These are Anagrams")
 
-anagram('abcd','cba')
+anagram('abc','cba')
